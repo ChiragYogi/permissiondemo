@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PermissionDemo</string>
+    <string name="label_open_gallery">Open gallery!</string>
+    <string name="label_open_camera">Open camera!</string>
 </resources>
