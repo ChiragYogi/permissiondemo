@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -22,6 +23,8 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private var latestTmpUri: Uri? = null
+
+    private var isAnimationIsOnGoing = false
 
     val cameraLauncher =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSucess ->
@@ -44,7 +47,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
     lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,8 +64,17 @@ class MainActivity : AppCompatActivity() {
         binding.buttonClickGallery.setOnClickListener {
             galleryLauncher.launch("image/*")
         }
-    }
 
+        binding.buttonRotateImage.setOnClickListener {
+
+            val raoteAminateino = AnimationUtils.loadAnimation(this, R.anim.rotate_animation)
+
+            isAnimationIsOnGoing = true
+
+
+            binding.imageView.startAnimation(raoteAminateino)
+        }
+    }
 
 
     private fun getTmpFileUri(): Uri {
